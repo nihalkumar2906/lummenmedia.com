@@ -290,7 +290,34 @@
 </svg>
 </div>
     <!-- Start of bodyEnd -->
-    
+
     <!-- End of bodyEnd -->
+<style>
+/* Hide Framer contact form — replaced by Calendly button below */
+form[data-framer-name] { display: none !important; }
+</style>
+<script>
+(function() {
+  var calendlyHref = "https://calendly.com/nihalstudio/growth-strategy-call";
+  var inserted = false;
+
+  function insertBtn() {
+    if (inserted) return;
+    var form = document.querySelector('form[data-framer-name]');
+    if (!form) return;
+    inserted = true;
+    var container = document.createElement('div');
+    container.setAttribute('data-calendly-btn', '1');
+    container.style.cssText = 'display:flex;justify-content:center;padding:24px 0';
+    container.innerHTML = '<a href="' + calendlyHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background:rgb(255,255,255);color:rgb(19,19,19);border-radius:10px;padding:14px 28px;font-family:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap">Book a Strategy Call</a>';
+    form.parentNode.insertBefore(container, form.nextSibling);
+    observer.disconnect();
+  }
+
+  var observer = new MutationObserver(insertBtn);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+  insertBtn();
+})();
+</script>
 </body>
 </html>
