@@ -310,8 +310,8 @@ a[href="https://themysticstudios.com/"] { pointer-events: none !important; curso
     inserted = true;
     var container = document.createElement('div');
     container.setAttribute('data-calendly-btn', '1');
-    container.style.cssText = 'display:flex;justify-content:center;padding:24px 0';
-    container.innerHTML = '<a href="' + calendlyHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background-image:linear-gradient(rgb(79,26,214) 0%,rgb(128,89,227) 100%);color:rgb(255,255,255);border-radius:10px;padding:14px 28px;font-family:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap;border:none">Book A Call</a>';
+    container.style.cssText = 'display:flex;justify-content:center;padding:24px 0;position:relative;z-index:100';
+    container.innerHTML = '<a href="' + calendlyHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background-image:linear-gradient(rgb(79,26,214) 0%,rgb(128,89,227) 100%);color:rgb(255,255,255)!important;border-radius:10px;padding:14px 28px;font-family:\'DM Sans\',sans-serif;font-size:15px;font-weight:600;letter-spacing:normal;text-decoration:none;cursor:pointer;white-space:nowrap;border:none;position:relative;z-index:100">Book A Call</a>';
     form.parentNode.insertBefore(container, form.nextSibling);
     observer.disconnect();
   }
