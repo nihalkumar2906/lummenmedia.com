@@ -307,11 +307,23 @@ a[href="https://themysticstudios.com/"] { pointer-events: none !important; curso
     if (inserted) return;
     var form = document.querySelector('form[data-framer-name]');
     if (!form) return;
+    // Find an existing purple button to clone (same Framer classes/styles)
+    var source = [...document.querySelectorAll('a[data-framer-name="Purple"]')][0];
+    if (!source) return;
     inserted = true;
+    var clone = source.cloneNode(true);
+    clone.setAttribute('href', calendlyHref);
+    clone.setAttribute('target', '_blank');
+    clone.setAttribute('rel', 'noopener noreferrer');
+    clone.removeAttribute('data-highlight');
+    clone.removeAttribute('tabindex');
+    // Replace button text
+    var textEl = clone.querySelector('p') || clone.querySelector('span') || clone;
+    if (textEl && textEl !== clone) textEl.textContent = 'Book A Call';
     var container = document.createElement('div');
     container.setAttribute('data-calendly-btn', '1');
     container.style.cssText = 'display:flex;justify-content:center;padding:24px 0;position:relative;z-index:100';
-    container.innerHTML = '<a href="' + calendlyHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background-image:linear-gradient(rgb(79,26,214) 0%,rgb(128,89,227) 100%);color:rgb(255,255,255)!important;border-radius:10px;padding:14px 28px;font-family:\'DM Sans\',sans-serif;font-size:15px;font-weight:600;letter-spacing:normal;text-decoration:none;cursor:pointer;white-space:nowrap;border:none;position:relative;z-index:100">Book A Call</a>';
+    container.appendChild(clone);
     form.parentNode.insertBefore(container, form.nextSibling);
     observer.disconnect();
   }
