@@ -295,6 +295,8 @@
 <style>
 /* Hide Framer contact form — replaced by Calendly button below */
 form[data-framer-name] { display: none !important; }
+/* Remove footer copyright link */
+a[href="https://themysticstudios.com/"] { pointer-events: none !important; cursor: default !important; text-decoration: none !important; color: inherit !important; }
 </style>
 <script>
 (function() {
@@ -309,7 +311,7 @@ form[data-framer-name] { display: none !important; }
     var container = document.createElement('div');
     container.setAttribute('data-calendly-btn', '1');
     container.style.cssText = 'display:flex;justify-content:center;padding:24px 0';
-    container.innerHTML = '<a href="' + calendlyHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background:rgb(255,255,255);color:rgb(19,19,19);border-radius:10px;padding:14px 28px;font-family:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap">Book a Strategy Call</a>';
+    container.innerHTML = '<a href="' + calendlyHref + '" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;justify-content:center;background-image:linear-gradient(rgb(79,26,214) 0%,rgb(128,89,227) 100%);color:rgb(255,255,255);border-radius:10px;padding:14px 28px;font-family:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap;border:none">Book A Call</a>';
     form.parentNode.insertBefore(container, form.nextSibling);
     observer.disconnect();
   }
@@ -317,6 +319,17 @@ form[data-framer-name] { display: none !important; }
   var observer = new MutationObserver(insertBtn);
   observer.observe(document.documentElement, { childList: true, subtree: true });
   insertBtn();
+
+  // Remove footer copyright link
+  function removeCopyrightLink() {
+    var link = document.querySelector('a[href="https://themysticstudios.com/"]');
+    if (!link) return;
+    link.removeAttribute('href');
+    link.style.cursor = 'default';
+  }
+  var linkObserver = new MutationObserver(removeCopyrightLink);
+  linkObserver.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+  removeCopyrightLink();
 })();
 </script>
 </body>
